@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.plot.ly/plotly-2.20.0.min.js"
+      charset="utf-8"
+    ></script>
+    <title>Bar chart examples with plotly.js</title>
+  </head>
+  <body>
+    <div id="bar-chart"></div>
+    <hr />
+    <br />
+    <div id="random-bars"></div>
+
+    <script>
+      var trace1 = {
+        x: ["giraffes", "orangutans", "monkeys"],
+        y: [20, 14, 23],
+        name: "SF Zoo",
+        type: "bar",
+        marker: { color: "rgba(255, 126, 107, 0.3)" },
+      };
+
+      var trace2 = {
+        x: ["giraffes", "orangutans", "monkeys"],
+        y: [12, 18, 29],
+        name: "LA Zoo",
+        type: "bar",
+        marker: { color: "rgba(92, 200, 255, 0.3)" },
+      };
+
+      var data = [trace1, trace2];
+
+      var layout = { barmode: "stack" };
+
+      var config = {
+        responsive: true,
+      };
+
+      Plotly.newPlot("bar-chart", data, layout, config);
+
+      // Random integer function
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Create two random tablea on a page load
+      let randomTable = [];
+      let randomTable2 = [];
+      for (let i = 0; i < 10; i++) {
+        if (i < 5) {
+          randomTable.push(getRandomInt(-50, 50));
+        } else {
+          randomTable2.push(getRandomInt(-50, 50));
+        }
+      }
+
+      // Bar chart with random data
+      var randomTrace = {
+        x: [1, 2, 3, 4, 5],
+        y: randomTable,
+        type: "bar",
+        marker: { color: "rgba(255, 126, 107, 0.3)" },
+      };
+
+      var randomTrace2 = {
+        x: [1, 2, 3, 4, 5],
+        y: randomTable2,
+        type: "bar",
+        marker: { color: "rgba(92, 200, 255, 0.3)" },
+      };
+
+      var randomData = [randomTrace, randomTrace2];
+
+      var layout2 = {
+        title: "Bar chart with random data",
+        yaxis: { range: [-60, 60] },
+      };
+
+      Plotly.newPlot("random-bars", randomData, layout2, config);
+    </script>
+  </body>
+</html>
