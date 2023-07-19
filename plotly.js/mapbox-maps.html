@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.plot.ly/plotly-2.20.0.min.js"
+      charset="utf-8"
+    ></script>
+    <title>Mapbox maps with Plotly.js</title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <p>Change the map style:</p>
+    <button onclick="changeMapStyle('mapbox://styles/mapbox/streets-v11')">
+      Streets
+    </button>
+    <button onclick="changeMapStyle('mapbox://styles/mapbox/light-v10')">
+      Light
+    </button>
+    <button onclick="changeMapStyle('mapbox://styles/mapbox/dark-v10')">
+      Dark
+    </button>
+    <button onclick="changeMapStyle('mapbox://styles/mapbox/satellite-v9')">
+      Satellite
+    </button>
+    <button
+      onclick="changeMapStyle('mapbox://styles/mapbox/satellite-streets-v11')"
+    >
+      Satellite streets
+    </button>
+
+    <script>
+      var trace1 = {
+        type: "scattermapbox",
+        mode: "markers",
+        marker: {
+          size: 18,
+        },
+        name: "Work",
+        text: ["Choicely Oy"],
+        lat: ["60.17168627928626"],
+        lon: ["24.94556430037168"],
+      };
+
+      var trace2 = {
+        type: "scattermapbox",
+        mode: "markers",
+        marker: {
+          size: 18,
+        },
+        name: "Culture",
+        text: ["Keskustakirjasto Oodi", "Suomenlinna"],
+        lat: ["60.17372306124966", "60.144700291723616"],
+        lon: ["24.938167538069695", "24.98266765211317"],
+      };
+
+      var trace3 = {
+        type: "scattermapbox",
+        mode: "markers",
+        marker: {
+          size: 18,
+        },
+        name: "Fun",
+        text: ["Hietaranta Beach", "Linnanmäki", "Korkeasaari"],
+        lat: ["60.17389727593735", "60.188446226330626", "60.17498292337029"],
+        lon: ["24.90820201234786", "24.941206039772613", "24.985985036060324"],
+      };
+
+      var data = [trace1, trace2, trace3];
+
+      var layout = {
+        title: "Cool places in Helsinki",
+        autosize: true,
+        mapbox: {
+          style: "mapbox://styles/mapbox/streets-v11",
+          bearing: 0,
+          center: {
+            lat: 60.16993873097229,
+            lon: 24.93904038394501,
+          },
+          pitch: 0,
+          zoom: 11,
+        },
+        height: 700,
+        showlegend: true,
+      };
+
+      // Function to change the map style
+      function changeMapStyle(style) {
+        // Update the layout object with the new map style
+        var layoutUpdate = {
+          mapbox: {
+            style: style,
+            zoom: layout.mapbox.zoom,
+            center: {
+              lat: layout.mapbox.center.lat,
+              lon: layout.mapbox.center.lon,
+            },
+          },
+        };
+
+        // Update the plot with the new layout
+        Plotly.update("map", {}, layoutUpdate);
+      }
+
+      Plotly.setPlotConfig({
+        mapboxAccessToken:
+          "", // Your Mapbox access token
+      });
+
+      Plotly.newPlot("map", data, layout);
+    </script>
+  </body>
+</html>

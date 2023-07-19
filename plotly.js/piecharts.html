@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.plot.ly/plotly-2.20.0.min.js"
+      charset="utf-8"
+    ></script>
+    <title>Pie chart examples with plotly.js</title>
+  </head>
+  <body>
+    <div id="pie-chart"></div>
+    <hr />
+    <br />
+    <div id="random-pie"></div>
+
+    <script>
+      // Pie chart
+      var data = [
+        {
+          values: [19, 26, 55],
+          labels: ["Residential", "Non-Residential", "Utility"],
+          type: "pie",
+        },
+      ];
+
+      var layout = {
+        title: "Pie chart",
+      };
+
+      var config = {
+        responsive: true,
+      };
+
+      Plotly.newPlot("pie-chart", data, layout, config);
+
+      // Random integer function
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Create a random table on a page load
+      let randomTable = [];
+      for (let i = 0; i < 5; i++) {
+        randomTable.push(getRandomInt(0, 100));
+      }
+
+      // Pie chart with random data
+      var data2 = [
+        {
+          values: randomTable,
+          labels: ["Slice 1", "Slice 2", "Slice 3", "Slice 4", "Slice 5"],
+          type: "pie",
+        },
+      ];
+
+      var layout2 = {
+        title: "Pie chart with random data",
+      };
+
+      Plotly.newPlot("random-pie", data2, layout2, config);
+    </script>
+  </body>
+</html>

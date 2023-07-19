@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.plot.ly/plotly-2.20.0.min.js"
+      charset="utf-8"
+    ></script>
+    <title>Line chart examples with plotly.js</title>
+  </head>
+  <body>
+    <div id="line-chart"></div>
+    <hr />
+    <br />
+    <div id="random-lines"></div>
+    <script>
+      // Line chart with some styling
+      var trace1 = {
+        x: [1, 2, 3, 4, 5],
+        y: [100, 60, 30, 60, 10],
+        mode: "lines+markers+text",
+        type: "scatter",
+        name: "Beta",
+        text: ["Mobile A", "Mobile B", "Mobile C", "Mobile D", "Mobile E"],
+        textposition: "top center",
+        textfont: { family: "Raleway, sans-serif" },
+        marker: { size: 12 },
+      };
+      var trace2 = {
+        x: [1.5, 2.5, 3.5, 4.5, 5.5],
+        y: [100, 10, 70, 150, 40],
+        mode: "lines+markers+text",
+        type: "scatter",
+        name: "Alpha",
+        text: ["Product A", "Product B", "Product C", "Product D", "Product E"],
+        textfont: { family: "Times New Roman" },
+        textposition: "bottom center",
+        marker: { size: 12 },
+      };
+
+      var data = [trace1, trace2];
+
+      var layout = {
+        xaxis: { range: [0.75, 5.25] },
+        yaxis: { range: [0, 200] },
+        legend: {
+          y: 0.5,
+          yref: "paper",
+          font: { family: "Arial, sans-serif", size: 20, color: "black" },
+        },
+        title: "Data Labels on the Plot",
+      };
+
+      var config = {
+        responsive: true,
+      };
+
+      Plotly.newPlot("line-chart", data, layout, config);
+
+      // Random integer function
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Create two random tablea on a page load
+      let randomTable = [];
+      let randomTable2 = [];
+      for (let i = 0; i < 20; i++) {
+        if (i < 10) {
+          randomTable.push(getRandomInt(0, 50));
+        } else {
+          randomTable2.push(getRandomInt(0, 50));
+        }
+      }
+
+      // Line chart with random data
+      var randomTrace = {
+        x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        y: randomTable,
+        type: "scatter",
+      };
+
+      var randomTrace2 = {
+        x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        y: randomTable2,
+        type: "scatter",
+      };
+
+      var randomData = [randomTrace, randomTrace2];
+
+      var layout2 = {
+        title: "Line chart with random data",
+        yaxis: { range: [0, 50] },
+      };
+
+      Plotly.newPlot("random-lines", randomData, layout2, config);
+    </script>
+  </body>
+</html>
