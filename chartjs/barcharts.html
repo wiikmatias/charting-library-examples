@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bar chart examples with Charts.js</title>
+    <!--Chart.js JS CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <canvas id="random-bar"></canvas>
+    <hr />
+    <br />
+    <canvas id="bar-chart"></canvas>
+
+    <script>
+      // Random integer function
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Create a random table on page load
+      let randomTable = [];
+
+      for (let i = 0; i < 6; i++) {
+        randomTable.push(getRandomInt(-20, 20));
+
+        // Bar chart with random integers
+        var randomBarChartCtx = document
+          .getElementById("random-bar")
+          .getContext("2d");
+      }
+
+      var randomBarChart = new Chart(randomBarChartCtx, {
+        type: "bar",
+        data: {
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          datasets: [
+            {
+              label: "Bar chart with random integers",
+              data: randomTable,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      // Bar chart
+      var barChartCtx = document.getElementById("bar-chart").getContext("2d");
+      var barChart = new Chart(barChartCtx, {
+        type: "bar",
+        data: {
+          labels: ["January", "February", "March"],
+          datasets: [
+            {
+              label: "First dataset",
+              data: [12, 19, 3, 14, 2, 3, 9, 8, 16],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+              ],
+              borderWidth: 1,
+            },
+            {
+              label: "Second dataset",
+              data: [10, 7, 16],
+              backgroundColor: [
+                "rgba(75, 192, 192, 0.2)",
+              ],
+              borderColor: [
+                "rgba(75, 192, 192, 1)",
+              ],
+              borderWidth: 1,
+            },
+            {
+              label: "Third dataset",
+              data: [8, 8, 5],
+              backgroundColor: [
+                "rgba(210,105,30, 0.2)",
+              ],
+              borderColor: [
+                "rgba(210,105,30, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
