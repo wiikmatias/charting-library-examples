@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Line chart examples with Charts.js</title>
+    <!--Chart.js JS CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <canvas id="random-line"></canvas>
+    <hr />
+    <br />
+    <canvas id="line-chart"></canvas>
+
+    <script>
+      // Random integer function
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Create a random table on page load
+      let randomTable = [];
+      for (let i = 0; i < 7; i++) {
+        randomTable.push(getRandomInt(-99, 99));
+      }
+
+      // Line chart with random integers
+      var randomLineChartCtx = document
+        .getElementById("random-line")
+        .getContext("2d");
+
+      var randomLineChart = new Chart(randomLineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+          ],
+          datasets: [
+            {
+              label: "Line graph with random integers",
+              data: randomTable,
+              fill: true,
+              borderColor: "rgb(75, 192, 192)",
+              tension: 0.1,
+              pointStyle: "circle",
+              pointRadius: 20,
+              pointHoverRadius: 25,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      // Line chart
+      var lineChartCtx = document.getElementById("line-chart").getContext("2d");
+      var lineChart = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+          ],
+          datasets: [
+            {
+              label: "Red line",
+              data: [65, 59, 80, 81, 56, 55, 40],
+              fill: false,
+              backgroundColor: "rgb(255, 0, 0)",
+              borderColor: "rgb(255, 0, 0)",
+              tension: 0.1,
+              pointStyle: "circle",
+              pointRadius: 5,
+              pointHoverRadius: 10,
+            },
+            {
+              label: "Blue line",
+              data: [21, 55, 90, 13, 55, 22, 7],
+              fill: false,
+              backgroundColor: "rgb(0, 0, 255)",
+              borderColor: "rgb(0, 0, 255)",
+              tension: 0.1,
+              pointStyle: "circle",
+              pointRadius: 5,
+              pointHoverRadius: 10,
+            },
+            {
+              label: "Green line",
+              data: [90, 5, 30, 66, 14, 91, 1],
+              fill: false,
+              backgroundColor: "rgb(50,205,50)",
+              borderColor: "rgb(50,205,50)",
+              tension: 0.1,
+              pointStyle: "circle",
+              pointRadius: 5,
+              pointHoverRadius: 10,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

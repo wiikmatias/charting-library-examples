@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pie chart examples with Charts.js</title>
+    <!--Chart.js JS CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <canvas id="random-pie" width="400" height="400"></canvas>
+    <hr />
+    <br />
+    <canvas id="pie-chart" width="400" height="400"></canvas>
+
+    <script>
+      // Random integer function
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Create a random table on page load
+      let randomTable = [];
+      for (let i = 0; i < 3; i++) {
+        randomTable.push(getRandomInt(0, 100));
+      }
+
+      // Pie chart with random integers
+      var randomPieChartCtx = document.getElementById("random-pie");
+
+      var randomChartPie = new Chart(randomPieChartCtx, {
+        type: "pie",
+        data: {
+          labels: ["Red", "Blue", "Yellow"],
+          datasets: [
+            {
+              label: "Pie chart with random integers",
+              data: randomTable,
+              backgroundColor: [
+                "rgb(255, 99, 132)",
+                "rgb(54, 162, 235)",
+                "rgb(255, 205, 86)",
+              ],
+              hoverOffset: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+        },
+      });
+
+      // Pie chart
+      var pieChartCtx = document.getElementById("pie-chart").getContext("2d");
+      var chartPie = new Chart(pieChartCtx, {
+        type: "pie",
+        data: {
+          labels: ["Red", "Blue", "Yellow"],
+          datasets: [
+            {
+              label: "Pie chart",
+              data: [300, 50, 100],
+              backgroundColor: [
+                "rgb(255, 99, 132)",
+                "rgb(54, 162, 235)",
+                "rgb(255, 205, 86)",
+              ],
+              hoverOffset: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+        },
+      });
+    </script>
+  </body>
+</html>
