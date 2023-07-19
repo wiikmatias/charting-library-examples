@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <title>Highcharts examples: Bar charts</title>
+  </head>
+  <body>
+    <div id="random-bars" style="width: 100%; height: 400px"></div>
+    <hr />
+    <br />
+    <div id="bar-chart" style="width: 100%; height: 400px"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Random integer function
+        function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Create random datasets on page load
+        let randomTable1 = [];
+        let randomTable2 = [];
+        let randomTable3 = [];
+        for (let i = 0; i < 15; i++) {
+          if (i < 5) {
+            randomTable1.push(getRandomInt(-4, 8));
+          } else if (i < 10) {
+            randomTable2.push(getRandomInt(-4, 8));
+          } else {
+            randomTable3.push(getRandomInt(-4, 8));
+          }
+        }
+
+        // Column chart (bar chart) with random tables
+        var randomOptions = {
+          chart: {
+            type: "column",
+            renderTo: "random-bars",
+          },
+          title: {
+            text: "Column chart with random values",
+          },
+          xAxis: {
+            categories: ["Apples", "Oranges", "Pears", "Grapes", "Bananas"],
+          },
+          credits: {
+            enabled: false,
+          },
+          plotOptions: {
+            column: {
+              borderRadius: "25%",
+            },
+          },
+          series: [
+            {
+              name: "John",
+              data: randomTable1,
+            },
+            {
+              name: "Jane",
+              data: randomTable2,
+            },
+            {
+              name: "Joe",
+              data: randomTable3,
+            },
+          ],
+        };
+        var randomBars = new Highcharts.Chart(randomOptions);
+
+        // Stacked bar chart
+        var barOptions = {
+          chart: {
+            renderTo: "bar-chart",
+            type: "column",
+          },
+
+          title: {
+            text: "Olympic Games all-time medal table, grouped by continent",
+            align: "left",
+          },
+
+          xAxis: {
+            categories: ["Gold", "Silver", "Bronze"],
+          },
+
+          yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+              text: "Count medals",
+            },
+          },
+
+          tooltip: {
+            formatter: function () {
+              return (
+                "<b>" +
+                this.x +
+                "</b><br/>" +
+                this.series.name +
+                ": " +
+                this.y +
+                "<br/>" +
+                "Total: " +
+                this.point.stackTotal
+              );
+            },
+          },
+
+          plotOptions: {
+            column: {
+              stacking: "normal",
+            },
+          },
+
+          series: [
+            {
+              name: "Norway",
+              data: [148, 133, 124],
+              stack: "Europe",
+            },
+            {
+              name: "Germany",
+              data: [102, 98, 65],
+              stack: "Europe",
+            },
+            {
+              name: "United States",
+              data: [113, 122, 95],
+              stack: "North America",
+            },
+            {
+              name: "Canada",
+              data: [77, 72, 80],
+              stack: "North America",
+            },
+          ],
+        };
+
+        var barChart = new Highcharts.Chart(barOptions);
+      });
+    </script>
+  </body>
+</html>
