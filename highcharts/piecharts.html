@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <title>Highcharts examples: Pie charts</title>
+  </head>
+  <body>
+    <div id="3d-pie" style="width: 100%; height: 400px"></div>
+    <hr />
+    <br />
+    <div id="gradient-pie" style="width: 100%; height: 400px"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 3d pie chart
+        var threeDPieOptions = {
+          chart: {
+            renderTo: "3d-pie",
+            type: "pie",
+            options3d: {
+              enabled: true,
+              alpha: 45,
+              beta: 0,
+            },
+          },
+          title: {
+            text: "Global smartphone shipments market share, Q1 2022",
+            align: "left",
+          },
+          subtitle: {
+            text:
+              "Source: " +
+              '<a href="https://www.counterpointresearch.com/global-smartphone-share/"' +
+              'target="_blank">Counterpoint Research</a>',
+            align: "left",
+          },
+          accessibility: {
+            point: {
+              valueSuffix: "%",
+            },
+          },
+          tooltip: {
+            pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+          },
+          plotOptions: {
+            pie: {
+              allowPointSelect: true,
+              cursor: "pointer",
+              depth: 35,
+              dataLabels: {
+                enabled: true,
+                format: "{point.name}",
+              },
+            },
+          },
+          series: [
+            {
+              type: "pie",
+              name: "Share",
+              data: [
+                ["Samsung", 23],
+                ["Apple", 18],
+                {
+                  name: "Xiaomi",
+                  y: 12,
+                  sliced: true,
+                  selected: true,
+                },
+                ["Oppo*", 9],
+                ["Vivo", 8],
+                ["Others", 30],
+              ],
+            },
+          ],
+        };
+        var threeDPie = new Highcharts.Chart(threeDPieOptions);
+
+        // Pie chart with gradients
+        var gradientPieOptions = {
+          chart: {
+            renderTo: "gradient-pie",
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: "pie",
+          },
+          title: {
+            text: "Browser market shares in April, 2022",
+            align: "left",
+          },
+          tooltip: {
+            pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+          },
+          accessibility: {
+            point: {
+              valueSuffix: "%",
+            },
+          },
+          colors: Highcharts.map(
+            Highcharts.getOptions().colors,
+            function (color) {
+              return {
+                radialGradient: {
+                  cx: 0.5,
+                  cy: 0.3,
+                  r: 0.7,
+                },
+                stops: [
+                  [0, color],
+                  [1, Highcharts.color(color).brighten(-0.3).get("rgb")], // darken
+                ],
+              };
+            }
+          ),
+          plotOptions: {
+            pie: {
+              allowPointSelect: true,
+              cursor: "pointer",
+              dataLabels: {
+                enabled: true,
+                format: "<b>{point.name}</b>: {point.percentage:.1f} %",
+                connectorColor: "silver",
+              },
+            },
+          },
+          series: [
+            {
+              name: "Share",
+              data: [
+                { name: "Chrome", y: 73.24 },
+                { name: "Edge", y: 12.93 },
+                { name: "Firefox", y: 4.73 },
+                { name: "Safari", y: 2.5 },
+                { name: "Internet Explorer", y: 1.65 },
+                { name: "Other", y: 4.93 },
+              ],
+            },
+          ],
+        };
+
+        var gradientPie = new Highcharts.Chart(gradientPieOptions);
+      });
+    </script>
+  </body>
+</html>
